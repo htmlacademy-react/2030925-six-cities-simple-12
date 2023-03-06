@@ -1,4 +1,9 @@
 import MainPage from '../../pages/main-page';
+import { AppRoute } from '../../const';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LoginPage from '../../pages/login-page';
+import ErrorPage from '../../pages/error-page';
+
 
 type AppScreenProps = {
   offersCount: number;
@@ -6,7 +11,24 @@ type AppScreenProps = {
 
 function App({offersCount}: AppScreenProps): JSX.Element {
   return(
-    <MainPage offersCount={offersCount}/>
+    <BrowserRouter>
+      <Routes>
+        <Route path={AppRoute.Main}/>
+        <Route index element={<MainPage offersCount={offersCount}/>}/>
+        <Route
+          path={AppRoute.Login}
+          element={<LoginPage/>}
+        />
+        <Route
+          path={AppRoute.Room}
+          element='/offer/:id'
+        />
+        <Route
+          path='*'
+          element={<ErrorPage/>}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
