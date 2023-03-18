@@ -1,11 +1,13 @@
+import { Offers } from '../types/offer-type';
 import Logo from './logo';
-import OfferCard from './offer-card-page';
+import OfferListPage from './offer-list-page';
 
 type MainPageProps = {
   offersCount: number;
+  offers: Offers;
 };
 
-export default function MainPage ({offersCount}: MainPageProps): JSX.Element {
+export default function MainPage ({offersCount,offers}: MainPageProps): JSX.Element {
   return (
     <body className="page page--gray page--main">
       <div style={{display: 'none'}}>
@@ -96,11 +98,7 @@ export default function MainPage ({offersCount}: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OfferCard/>
-                <OfferCard/>
-                <OfferCard/>
-                <OfferCard/>
-                <OfferCard/>
+                <OfferListPage offers={offers}/>
               </div>
             </section>
             <div className="cities__right-section">
