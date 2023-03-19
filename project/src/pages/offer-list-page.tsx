@@ -26,22 +26,3 @@ export default function OfferListPage (props: OfferListProps): JSX.Element {
 }
 
 
-
-
-
-
-
-
-    /*
-  const {offers} = props;
-  {const itemList = offers.map((value: Offer, id: number) =>
-    <OfferCard key={id} offer={value}/>);
-  return(
-    <div className='cities__places-list places__list tabs__content'>
-      {itemList}
-    </div>
-  );}
-}
-*/
-
-

@@ -5,6 +5,8 @@ import LoginPage from '../../pages/login-page';
 import ErrorPage from '../../pages/error-page';
 import { Offer } from '../../types/offer-type';
 import { Reviews } from '../../types/review-type';
+import Room from '../../pages/room';
+import { User } from '../../types/user-type';
 
 
 type AppScreenProps = {
@@ -25,7 +27,7 @@ function App({offersCount,offers,reviews}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Room}
-          element='/offer/:id'
+          element={<Room reviews={reviews}/>}
         />
         <Route
           path='*'

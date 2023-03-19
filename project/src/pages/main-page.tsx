@@ -1,5 +1,5 @@
 import { Offers } from '../types/offer-type';
-import Logo from './logo';
+import Logo from '../components/logo/logo';
 import OfferListPage from './offer-list-page';
 
 type MainPageProps = {

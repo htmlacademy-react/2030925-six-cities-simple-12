@@ -16,7 +16,7 @@ export const reviews: Reviews = [
   }, {
     id: 2,
     rating: 4,
-    date: 'Mart, 27',
+    date: 'March, 27',
     text: 'So good',
     user: {
       id: 2,
