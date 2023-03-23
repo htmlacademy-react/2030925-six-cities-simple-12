@@ -1,4 +1,4 @@
-import Logo from './logo';
+import Logo from '../components/logo/logo';
 
 export default function EmptyMainPage (): JSX.Element {
   return(

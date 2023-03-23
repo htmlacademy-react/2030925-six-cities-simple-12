@@ -1,6 +1,15 @@
-import Logo from './logo';
+import { hostname } from 'os';
+import CommentForm from '../components/comment-form/comment-form';
+import Logo from '../components/logo/logo';
+import { offers } from '../mocks/offers';
+import { Reviews } from '../types/review-type';
+import { User } from '../types/user-type';
 
-export default function PropertyNotLogged(): JSX.Element {
+
+type RoomScreenProps = {
+  reviews: Reviews
+}
+export default function PropertyPage({reviews}: RoomScreenProps): JSX.Element {
   return(
     <body>
       <div className="page">
@@ -17,9 +26,14 @@ export default function PropertyNotLogged(): JSX.Element {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
+                    <div className="header__nav-profile">
                       <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                      <span className="header__login">Sign in</span>
+                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    </div>
+                  </li>
+                  <li className="header__nav-item">
+                    <a className="header__nav-link" href="#">
+                      <span className="header__signout">Sign out</span>
                     </a>
                   </li>
                 </ul>
@@ -87,7 +101,7 @@ export default function PropertyNotLogged(): JSX.Element {
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                    <li className="property__inside-item">
+                  <li className="property__inside-item">
                     Wi-Fi
                     </li>
                     <li className="property__inside-item">
@@ -129,7 +143,7 @@ export default function PropertyNotLogged(): JSX.Element {
                     Angelina
                     </span>
                     <span className="property__user-status">
-                    Pro
+                    {}
                     </span>
                   </div>
                   <div className="property__description">
@@ -142,7 +156,7 @@ export default function PropertyNotLogged(): JSX.Element {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                   <ul className="reviews__list">
                     <li className="reviews__item">
                       <div className="reviews__user user">
@@ -167,6 +181,7 @@ export default function PropertyNotLogged(): JSX.Element {
                       </div>
                     </li>
                   </ul>
+                <CommentForm/>
                 </section>
               </div>
             </div>
