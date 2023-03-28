@@ -1,8 +1,5 @@
-import { useState } from 'react';
 import { Offer, Offers } from '../types/offer-type';
 import OfferCard from './offer-card-page';
-
-type ActiveOffer = Offer | null;
 
 export type OfferListProps = {
     offers: Offers;
@@ -10,13 +7,13 @@ export type OfferListProps = {
 }
 
 export default function OfferListPage (props: OfferListProps): JSX.Element {
-  const {offers,onListItemHover} = props
+  const {offers,onListItemHover} = props;
 
   const lists = offers.map((offer: Offer) => (
     <OfferCard
-    key={offer.id}
-    offer={offer}
-    onListItemHover={onListItemHover}
+      key={offer.id}
+      offer={offer}
+      onListItemHover={onListItemHover}
     />
   ));
   return (<div className='cities__places-list places__list tabs__content'>{lists}</div>);

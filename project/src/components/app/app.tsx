@@ -6,7 +6,6 @@ import ErrorPage from '../../pages/error-page';
 import { Offer } from '../../types/offer-type';
 import { Reviews } from '../../types/review-type';
 import Room from '../../pages/room';
-import { City } from '../../types/city-type';
 
 
 type AppScreenProps = {

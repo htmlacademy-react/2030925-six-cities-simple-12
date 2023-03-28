@@ -3,7 +3,6 @@ import Logo from '../components/logo/logo';
 import OfferListPage from './offer-list-page';
 import { Map } from '../components/map/map';
 import { useState } from 'react';
-import { City } from '../types/city-type';
 import { cities } from '../mocks/city';
 
 type MainPageProps = {
@@ -13,11 +12,11 @@ type MainPageProps = {
 };
 
 export default function MainPage ({offersCount,offers}: MainPageProps): JSX.Element {
-  const [activeOffer,setActiveOffer] = useState<Offer | undefined>(undefined)
+  const [activeOffer,setActiveOffer] = useState<Offer | undefined>(undefined);
   const onListItemHover = (listItemName: string| undefined) => {
-    const currentPoint = offers.find((offer) => offer.city.name === listItemName)
-    setActiveOffer(currentPoint)
-  }
+    const currentPoint = offers.find((offer) => offer.city.name === listItemName);
+    setActiveOffer(currentPoint);
+  };
   return (
     <body className="page page--gray page--main">
       <div style={{display: 'none'}}>
@@ -109,18 +108,18 @@ export default function MainPage ({offersCount,offers}: MainPageProps): JSX.Elem
               </form>
               <div className="cities__places-list places__list tabs__content">
                 <OfferListPage
-                offers={offers}
-                onListItemHover={onListItemHover}
+                  offers={offers}
+                  onListItemHover={onListItemHover}
                 />
               </div>
             </section>
             <div className="cities__right-section">
-            <Map
-            className='cities__map map'
-            city={cities[0]}
-            offers={offers}
-            selectedPoint={activeOffer}
-            />
+              <Map
+                className='cities__map map'
+                city={cities[0]}
+                offers={offers}
+                selectedPoint={activeOffer}
+              />
             </div>
           </div>
         </div>

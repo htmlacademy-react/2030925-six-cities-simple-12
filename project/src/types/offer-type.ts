@@ -14,7 +14,7 @@ export type Offer = {
     images: string[];
     rating: number;
     user: User;
-    city: City
+    city: City;
 };
 
 export type Offers = Offer[]
