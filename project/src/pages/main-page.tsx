@@ -8,7 +8,6 @@ import { cities } from '../mocks/city';
 type MainPageProps = {
   offersCount: number;
   offers: Offers;
-
 };
 
 export default function MainPage ({offersCount,offers}: MainPageProps): JSX.Element {
