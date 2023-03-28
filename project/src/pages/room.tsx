@@ -1,13 +1,10 @@
-import { hostname } from 'os';
 import CommentForm from '../components/comment-form/comment-form';
 import Logo from '../components/logo/logo';
-import { offers } from '../mocks/offers';
 import { Reviews } from '../types/review-type';
-import { User } from '../types/user-type';
 
 
 type RoomScreenProps = {
-  reviews: Reviews
+  reviews: Reviews;
 }
 export default function PropertyPage({reviews}: RoomScreenProps): JSX.Element {
   return(
@@ -101,7 +98,7 @@ export default function PropertyPage({reviews}: RoomScreenProps): JSX.Element {
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                  <li className="property__inside-item">
+                    <li className="property__inside-item">
                     Wi-Fi
                     </li>
                     <li className="property__inside-item">
@@ -143,7 +140,7 @@ export default function PropertyPage({reviews}: RoomScreenProps): JSX.Element {
                     Angelina
                     </span>
                     <span className="property__user-status">
-                    {}
+                      {}
                     </span>
                   </div>
                   <div className="property__description">
@@ -181,7 +178,7 @@ export default function PropertyPage({reviews}: RoomScreenProps): JSX.Element {
                       </div>
                     </li>
                   </ul>
-                <CommentForm/>
+                  <CommentForm/>
                 </section>
               </div>
             </div>

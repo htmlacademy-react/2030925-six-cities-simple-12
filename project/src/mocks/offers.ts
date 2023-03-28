@@ -20,6 +20,14 @@ export const offers: Offers = [
       name: 'Winston Churchill',
       isPro: true,
     },
+    city: {
+      location: {
+      lat: 52.3909553943508,
+      lng: 4.85309666406198,
+      zoom: 10,
+      },
+      name: 'Amsterdam',
+    },
   },
   {
     id: 2,
@@ -39,6 +47,14 @@ export const offers: Offers = [
       name: 'George Washington',
       isPro: true,
     },
+    city: {
+      location: {
+      lat: 52.3609553943508,
+      lng: 4.85309666406198,
+      zoom: 10,
+      },
+      name: 'Amsterdam',
+    }
   },
   {
     id: 3,
@@ -58,6 +74,14 @@ export const offers: Offers = [
       name: 'Brodyaga',
       isPro: true,
     },
+    city: {
+      location: {
+      lat: 52.3909553943508,
+      lng:4.929309666406198,
+      zoom: 10,
+      },
+      name: 'Amsterdam',
+    }
   },
   {
     id: 4,
@@ -77,6 +101,14 @@ export const offers: Offers = [
       name: 'Rayan Gosling',
       isPro: true,
     },
+    city: {
+      location: {
+      lat: 52.3809553943508,
+      lng: 4.939309666406198,
+      zoom: 10,
+      },
+      name: 'Amsterdam',
+    }
   },
 ];
 

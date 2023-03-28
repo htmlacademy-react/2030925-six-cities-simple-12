@@ -3,8 +3,7 @@ import { Offer } from '../types/offer-type';
 
 type OfferPageProps = {
   offer: Offer;
-  onActive: () => void;
-  onBlur: () => void;
+  onListItemHover: (listItemName: string | undefined) => void;
 }
 
 export default function OfferCard (props: OfferPageProps): JSX.Element {

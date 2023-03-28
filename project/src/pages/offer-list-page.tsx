@@ -6,23 +6,20 @@ type ActiveOffer = Offer | null;
 
 export type OfferListProps = {
     offers: Offers;
+    onListItemHover: (listItemName: string | undefined) => void;
 }
 
 export default function OfferListPage (props: OfferListProps): JSX.Element {
-    const [activeOffer,setActiveOffer] = useState<ActiveOffer>(null)
-    console.log(activeOffer)
-    return(
-        <div className='cities__places-list places__list tabs__content'>
-            {props.offers.map((offer: Offer): JSX.Element => (
-                <OfferCard
-                key={offer.id}
-                offer={offer}
-                onActive={() => setActiveOffer(offer)}
-                onBlur={() => setActiveOffer(null)}
-                />
-            ))}
-        </div>
-    )
+  const {offers,onListItemHover} = props
+
+  const lists = offers.map((offer: Offer) => (
+    <OfferCard
+    key={offer.id}
+    offer={offer}
+    onListItemHover={onListItemHover}
+    />
+  ));
+  return (<div className='cities__places-list places__list tabs__content'>{lists}</div>);
 }
 
 

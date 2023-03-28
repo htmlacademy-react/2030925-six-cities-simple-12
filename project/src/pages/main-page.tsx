@@ -1,13 +1,23 @@
-import { Offers } from '../types/offer-type';
+import { Offers, Offer } from '../types/offer-type';
 import Logo from '../components/logo/logo';
 import OfferListPage from './offer-list-page';
+import { Map } from '../components/map/map';
+import { useState } from 'react';
+import { City } from '../types/city-type';
+import { cities } from '../mocks/city';
 
 type MainPageProps = {
   offersCount: number;
   offers: Offers;
+
 };
 
 export default function MainPage ({offersCount,offers}: MainPageProps): JSX.Element {
+  const [activeOffer,setActiveOffer] = useState<Offer | undefined>(undefined)
+  const onListItemHover = (listItemName: string| undefined) => {
+    const currentPoint = offers.find((offer) => offer.city.name === listItemName)
+    setActiveOffer(currentPoint)
+  }
   return (
     <body className="page page--gray page--main">
       <div style={{display: 'none'}}>
@@ -98,11 +108,19 @@ export default function MainPage ({offersCount,offers}: MainPageProps): JSX.Elem
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OfferListPage offers={offers}/>
+                <OfferListPage
+                offers={offers}
+                onListItemHover={onListItemHover}
+                />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+            <Map
+            className='cities__map map'
+            city={cities[0]}
+            offers={offers}
+            selectedPoint={activeOffer}
+            />
             </div>
           </div>
         </div>
