@@ -26,7 +26,7 @@ const currentCustomIcon = new Icon({
 });
 
 export function Map(props: MapProps): JSX.Element {
-  const {city,offers,selectedPoint} = props;
+  const {city,offers,selectedPoint,className} = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -49,6 +49,6 @@ export function Map(props: MapProps): JSX.Element {
           .addTo(map);
       });
     }
-  }, [map,offers,selectedPoint]);
+  }, [map,offers,selectedPoint,className]);
   return <div style={{height: '500px', width: '500px'}} ref={mapRef}></div>;
 }

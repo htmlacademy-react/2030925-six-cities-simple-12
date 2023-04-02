@@ -3,21 +3,27 @@ import { Offer } from '../types/offer-type';
 
 type OfferPageProps = {
   offer: Offer;
-  onListItemHover: (listItemName: string | undefined) => void;
+  onActive: () => void;
+  onBlur: () => void;
 }
 
 export default function OfferCard (props: OfferPageProps): JSX.Element {
   const {offer} = props;
-  const {title,type,rating,cost,isPremium} = offer;
-  const pageLink = `/offer/${props.offer.id}`;
+  const {id,title,type,rating,cost,isPremium,images} = offer;
+  const pageLink = `/offer/${id}`;
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card"
+      onBlur={props.onBlur}
+      onFocus={props.onActive}
+      onMouseEnter={props.onActive}
+      onMouseLeave={props.onBlur}
+    >
       <div className="place-card__mark">
         <span>{isPremium ? 'Premium' : ''}</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={pageLink}>
-          <img className="place-card__image" src= {props.offer.images[0] ?? null} width="260" height="200" alt={title}/>
+          <img className="place-card__image" src= {images[0] ?? null} width="260" height="200" alt={title}/>
         </Link>
       </div>
       <div className="place-card__info">

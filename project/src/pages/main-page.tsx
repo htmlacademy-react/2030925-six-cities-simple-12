@@ -12,10 +12,6 @@ type MainPageProps = {
 
 export default function MainPage ({offersCount,offers}: MainPageProps): JSX.Element {
   const [activeOffer,setActiveOffer] = useState<Offer | undefined>(undefined);
-  const onListItemHover = (listItemName: string| undefined) => {
-    const currentPoint = offers.find((offer) => offer.city.name === listItemName);
-    setActiveOffer(currentPoint);
-  };
   return (
     <body className="page page--gray page--main">
       <div style={{display: 'none'}}>
@@ -108,7 +104,8 @@ export default function MainPage ({offersCount,offers}: MainPageProps): JSX.Elem
               <div className="cities__places-list places__list tabs__content">
                 <OfferListPage
                   offers={offers}
-                  onListItemHover={onListItemHover}
+                  onActive={(item) => setActiveOffer(item)}
+                  onBlur={() => setActiveOffer(undefined)}
                 />
               </div>
             </section>

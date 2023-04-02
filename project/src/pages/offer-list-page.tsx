@@ -1,22 +1,25 @@
 import { Offer, Offers } from '../types/offer-type';
 import OfferCard from './offer-card-page';
 
-export type OfferListProps = {
-    offers: Offers;
-    onListItemHover: (listItemName: string | undefined) => void;
+type OfferListProps = {
+  offers: Offers;
+  onActive: (item: Offer) => void;
+  onBlur: () => void;
+
 }
 
 export default function OfferListPage (props: OfferListProps): JSX.Element {
-  const {offers,onListItemHover} = props;
 
-  const lists = offers.map((offer: Offer) => (
+  const lists = props.offers.map((offer: Offer) => (
     <OfferCard
       key={offer.id}
       offer={offer}
-      onListItemHover={onListItemHover}
+      onActive={() => props.onActive(offer)}
+      onBlur={() => props.onBlur()}
     />
   ));
-  return (<div className='cities__places-list places__list tabs__content'>{lists}</div>);
+  return (
+    <div className='cities__places-list places__list tabs__content'>{lists}</div>
+  );
 }
-
 

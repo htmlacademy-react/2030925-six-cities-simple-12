@@ -19,7 +19,7 @@ function App({offersCount,offers,reviews}: AppScreenProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main}/>
-        <Route index element={<MainPage offersCount={offersCount} offers={offers}/>}/>
+        <Route index element={<MainPage offersCount={offersCount} offers={offers} />}/>
         <Route
           path={AppRoute.Login}
           element={<LoginPage/>}
