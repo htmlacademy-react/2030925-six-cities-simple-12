@@ -54,7 +54,7 @@ export const offers: Offers = [
         zoom: 10,
       },
       name: 'Amsterdam',
-    }
+    },
   },
   {
     id: 3,
@@ -81,7 +81,7 @@ export const offers: Offers = [
         zoom: 10,
       },
       name: 'Amsterdam',
-    }
+    },
   },
   {
     id: 4,
@@ -108,7 +108,7 @@ export const offers: Offers = [
         zoom: 10,
       },
       name: 'Amsterdam',
-    }
+    },
   },
 ];
 

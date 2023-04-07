@@ -7,7 +7,6 @@ import { City } from '../../types/city-type';
 import { Offers, Offer } from '../../types/offer-type';
 
 type MapProps = {
-    className: string;
     city: City;
     offers: Offers;
     selectedPoint: Offer | undefined;
@@ -26,7 +25,7 @@ const currentCustomIcon = new Icon({
 });
 
 export function Map(props: MapProps): JSX.Element {
-  const {city,offers,selectedPoint,className} = props;
+  const {city,offers,selectedPoint} = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -49,6 +48,6 @@ export function Map(props: MapProps): JSX.Element {
           .addTo(map);
       });
     }
-  }, [map,offers,selectedPoint,className]);
+  }, [map,offers,selectedPoint]);
   return <div style={{height: '500px', width: '500px'}} ref={mapRef}></div>;
 }

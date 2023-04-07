@@ -15,7 +15,7 @@ export default function useMap(
           lat: city.location.lat,
           lng: city.location.lng
         },
-        zoom: 10
+        zoom: city.location.zoom
       });
       const layer = new TileLayer(
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',

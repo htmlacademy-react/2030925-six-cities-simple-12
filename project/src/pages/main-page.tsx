@@ -110,12 +110,13 @@ export default function MainPage ({offersCount,offers}: MainPageProps): JSX.Elem
               </div>
             </section>
             <div className="cities__right-section">
-              <Map
-                className='cities__map map'
-                city={cities[0]}
-                offers={offers}
-                selectedPoint={activeOffer}
-              />
+              <section className="cities__map map">
+                <Map
+                  city={cities[0]}
+                  offers={offers}
+                  selectedPoint={activeOffer}
+                />
+              </section>
             </div>
           </div>
         </div>
