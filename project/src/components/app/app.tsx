@@ -6,7 +6,6 @@ import ErrorPage from '../../pages/error-page';
 import { Offer } from '../../types/offer-type';
 import { Reviews } from '../../types/review-type';
 import Room from '../../pages/room';
-import { User } from '../../types/user-type';
 
 
 type AppScreenProps = {
@@ -20,7 +19,7 @@ function App({offersCount,offers,reviews}: AppScreenProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main}/>
-        <Route index element={<MainPage offersCount={offersCount} offers={offers}/>}/>
+        <Route index element={<MainPage offersCount={offersCount} offers={offers} />}/>
         <Route
           path={AppRoute.Login}
           element={<LoginPage/>}

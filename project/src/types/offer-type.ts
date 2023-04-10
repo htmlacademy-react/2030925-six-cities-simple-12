@@ -1,3 +1,4 @@
+import { City } from './city-type';
 import { User } from './user-type';
 
 export type Offer = {
@@ -13,6 +14,7 @@ export type Offer = {
     images: string[];
     rating: number;
     user: User;
+    city: City;
 };
 
 export type Offers = Offer[]
