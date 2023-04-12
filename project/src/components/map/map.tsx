@@ -36,7 +36,7 @@ export function Map(props: MapProps): JSX.Element {
           .marker(
             {
               lat: offer.city.location.lat,
-              lng: offer.city.location.lng,
+              lng: offer.city.location.lng
             },
             {
               icon:

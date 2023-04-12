@@ -16,6 +16,7 @@ export default function MainPage ({offersCount,offers}: MainPageProps): JSX.Elem
   const [activeOffer,setActiveOffer] = useState<Offer | undefined>(undefined);
   const chooseOffersByCity = useAppSelector((state) => state.offers);
   const selectedCity = useAppSelector((state) => state.city);
+
   return (
     <body className="page page--gray page--main">
       <div style={{display: 'none'}}>
@@ -83,7 +84,7 @@ export default function MainPage ({offersCount,offers}: MainPageProps): JSX.Elem
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  city={chooseOffersByCity[0].city}
+                  city={offers[0].city}
                   offers={offers}
                   selectedPoint={activeOffer}
                 />
