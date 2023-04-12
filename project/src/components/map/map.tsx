@@ -49,5 +49,5 @@ export function Map(props: MapProps): JSX.Element {
       });
     }
   }, [map,offers,selectedPoint]);
-  return <div style={{height: '500px', width: '500px'}} ref={mapRef}></div>;
+  return <div style={{ width: '500px', height: '500px'}} ref={mapRef}></div>;
 }
