@@ -53,7 +53,7 @@ export const offers: Offers = [
         lng: 4.85309666406198,
         zoom: 10,
       },
-      name: 'Amsterdam',
+      name: 'Cologne',
     },
   },
   {
@@ -80,7 +80,7 @@ export const offers: Offers = [
         lng:4.929309666406198,
         zoom: 10,
       },
-      name: 'Amsterdam',
+      name: 'Brussels',
     },
   },
   {
@@ -107,7 +107,7 @@ export const offers: Offers = [
         lng: 4.939309666406198,
         zoom: 10,
       },
-      name: 'Amsterdam',
+      name: 'Paris',
     },
   },
 ];
