@@ -9,17 +9,16 @@ import Room from '../../pages/room';
 
 
 type AppScreenProps = {
-  offersCount: number;
   offers: Offer[];
   reviews: Reviews;
 }
 
-function App({offersCount,offers,reviews}: AppScreenProps): JSX.Element {
+function App({offers,reviews}: AppScreenProps): JSX.Element {
   return(
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main}/>
-        <Route index element={<MainPage offersCount={offersCount} offers={offers} />}/>
+        <Route index element={<MainPage offers={offers} />}/>
         <Route
           path={AppRoute.Login}
           element={<LoginPage/>}
