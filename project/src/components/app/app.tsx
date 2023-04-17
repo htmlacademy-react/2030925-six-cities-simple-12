@@ -7,7 +7,6 @@ import { Offer } from '../../types/offer-type';
 import { Reviews } from '../../types/review-type';
 import Room from '../../pages/room';
 
-
 type AppScreenProps = {
   offers: Offer[];
   reviews: Reviews;
@@ -25,7 +24,7 @@ function App({offers,reviews}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Room}
-          element={<Room reviews={reviews}/>}
+          element={<Room offer={offers[2]} reviews={reviews}/>}
         />
         <Route
           path='*'
