@@ -94,4 +94,3 @@ export default function MainPage ({offers}: MainPageProps): JSX.Element {
     </body>
   );
 }
-
