@@ -1,11 +1,10 @@
-import { Offer, Offers } from '../types/offer-type';
-import OfferCard from './offer-card-page';
+import { Offer, Offers } from '../../types/offer-type';
+import OfferCard from '../offer-card/offer-card';
 
 type OfferListProps = {
   offers: Offers;
   onActive: (item: Offer) => void;
   onBlur: () => void;
-
 }
 
 export default function OfferListPage (props: OfferListProps): JSX.Element {
