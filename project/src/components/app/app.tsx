@@ -3,28 +3,35 @@ import { AppRoute } from '../../const';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from '../../pages/login-page';
 import ErrorPage from '../../pages/error-page';
-import { Offer } from '../../types/offer-type';
 import { Reviews } from '../../types/review-type';
 import Room from '../../pages/room';
+import { useAppSelector } from '../../hooks';
+import LoadingPage from '../../pages/loading-page';
 
 type AppScreenProps = {
-  offers: Offer[];
   reviews: Reviews;
 }
 
-function App({offers,reviews}: AppScreenProps): JSX.Element {
+function App({reviews}: AppScreenProps): JSX.Element {
+  const isOffersLoading = useAppSelector((state) => state.offerIsLoadingStatus);
+
+  if(isOffersLoading) {
+    return(
+      <LoadingPage/>
+    );
+  }
   return(
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main}/>
-        <Route index element={<MainPage offers={offers} />}/>
+        <Route index element={<MainPage/>}/>
         <Route
           path={AppRoute.Login}
           element={<LoginPage/>}
         />
         <Route
           path={AppRoute.Room}
-          element={<Room offer={offers[2]} reviews={reviews}/>}
+          element={<Room reviews={reviews}/>}
         />
         <Route
           path='*'

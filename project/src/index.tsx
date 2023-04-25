@@ -1,9 +1,13 @@
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import App from './components/app/app';
-import { offers } from './mocks/offers';
-import { reviews } from './mocks/reviews';
+import Spinner from './components/spinner/spinner';
 import { store } from './store';
+import { fetchOffersAction } from './store/api-action';
+import { reviews } from './mocks/reviews';
+
+store.dispatch(fetchOffersAction());
 /*
 const Setting = {
   OffersCount: 312,
@@ -15,9 +19,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <Provider store = {store}>
-    <App
-      offers = {offers}
-      reviews = {reviews}
-    />
+    <Spinner/>
+    <ToastContainer/>
+    <App reviews = {reviews}/>
   </Provider>
 );

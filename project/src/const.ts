@@ -32,3 +32,9 @@ export const SortToLow = (a: Offer, b: Offer) => a.cost - b.cost;
 export const SortToHigh = (a: Offer, b: Offer) => b.cost - a.cost;
 
 export const SortTopRated = (a: Offer, b: Offer) => b.rating - a.rating;
+
+export const BasicURL = 'https://12.react.pages.academy/six-cities-simple';
+
+export const REQUEST_TIMEOUT = 5000;
+
+export const cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];

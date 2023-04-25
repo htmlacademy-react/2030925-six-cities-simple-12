@@ -1,8 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { getOffersByCity, SortBy, SortToHigh, SortToLow, SortTopRated } from '../const';
 import { Offers } from '../types/offer-type';
-import { offers } from '../mocks/offers';
-import { fillOffers, selectCity, sortOffers } from './action';
+import { fillOffers, loadOffers, selectCity, setOffersLoadingStatus, sortOffers } from './action';
 
 const DEFAULT_CITY = 'Paris';
 
@@ -11,13 +10,15 @@ export type InitialStateProps = {
   sortType: string;
   offers: Offers;
   offersByCity: Offers;
+  offerIsLoadingStatus: boolean;
 };
 
 const initialState:InitialStateProps = {
   city: DEFAULT_CITY,
-  offers: offers,
+  offers: [],
   sortType: SortBy.Popular,
-  offersByCity: getOffersByCity(offers,DEFAULT_CITY)
+  offersByCity: getOffersByCity([],DEFAULT_CITY),
+  offerIsLoadingStatus: false
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -45,5 +46,11 @@ export const reducer = createReducer(initialState, (builder) => {
         default:
           state.offersByCity = getOffersByCity(state.offers, state.city);
       }
+    })
+    .addCase(loadOffers, (state,action) => {
+      state.offers = action.payload;
+    })
+    .addCase(setOffersLoadingStatus, (state,action) => {
+      state.offerIsLoadingStatus = action.payload;
     });
 });
