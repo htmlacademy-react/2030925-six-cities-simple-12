@@ -7,7 +7,14 @@ export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensi
 export enum AppRoute {
     Main = '/',
     Login = '/login',
-    Room = '/offer/:id'
+    Room = '/offer/:id',
+
+}
+
+export enum ApiRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  LogOut = '/logOut',
 }
 
 export enum AVATAR_URL {
@@ -38,3 +45,9 @@ export const BasicURL = 'https://12.react.pages.academy/six-cities-simple';
 export const REQUEST_TIMEOUT = 5000;
 
 export const cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN'
+};

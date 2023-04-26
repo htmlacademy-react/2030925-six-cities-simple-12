@@ -1,6 +1,30 @@
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Logo from '../components/logo/logo';
+import { useAppDispatch } from '../hooks';
+import { loginAction } from '../store/api-action';
+import { AuthData } from '../types/auth-data';
 
 export default function LoginPage (): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const [data,setData] = useState<AuthData>({
+    mail: '',
+    password: ''
+  });
+
+  const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = evt.target;
+    setData({...data, [name]: value});
+  }
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    if (data.mail || data.password) {
+      dispatch(
+        loginAction({ mail: data.mail, password: data.password})
+      );
+    }
+  };
   return (
     <body>
       <div className="page page--gray page--login">
@@ -22,14 +46,14 @@ export default function LoginPage (): JSX.Element {
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>
-              <form className="login__form form" action="#" method="post">
+              <form className="login__form form" onSubmit={handleSubmit}>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
-                  <input className="login__input form__input" type="email" name="email" placeholder="Email" required/>
+                  <input className="login__input form__input" type="email" name="email" value={data.mail} onChange={handleChange} placeholder="Email" required/>
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">Password</label>
-                  <input className="login__input form__input" type="password" name="password" placeholder="Password" required/>
+                  <input className="login__input form__input" type="password" name="password" value={data.password} onChange={handleChange} placeholder="Password" required/>
                 </div>
                 <button className="login__submit form__submit button" type="submit">Sign in</button>
               </form>

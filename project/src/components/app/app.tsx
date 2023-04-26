@@ -7,6 +7,8 @@ import { Reviews } from '../../types/review-type';
 import Room from '../../pages/room';
 import { useAppSelector } from '../../hooks';
 import LoadingPage from '../../pages/loading-page';
+import HistoryRouter from '../history-router/history-router';
+import browserHistory from '../services/api/browser-history/browser-history';
 
 type AppScreenProps = {
   reviews: Reviews;
@@ -21,7 +23,7 @@ function App({reviews}: AppScreenProps): JSX.Element {
     );
   }
   return(
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main}/>
         <Route index element={<MainPage/>}/>
@@ -38,7 +40,7 @@ function App({reviews}: AppScreenProps): JSX.Element {
           element={<ErrorPage/>}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

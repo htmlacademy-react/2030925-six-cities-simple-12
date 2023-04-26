@@ -1,7 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { getOffersByCity, SortBy, SortToHigh, SortToLow, SortTopRated } from '../const';
+import { AuthorizationStatus, getOffersByCity, SortBy, SortToHigh, SortToLow, SortTopRated } from '../const';
 import { Offers } from '../types/offer-type';
-import { fillOffers, loadOffers, selectCity, setOffersLoadingStatus, sortOffers } from './action';
+import { UserData } from '../types/user-data';
+import { fillOffers, loadOffers, selectCity, setAuthorizationStatus, setOffersLoadingStatus, setUserData, sortOffers } from './action';
 
 const DEFAULT_CITY = 'Paris';
 
@@ -11,6 +12,8 @@ export type InitialStateProps = {
   offers: Offers;
   offersByCity: Offers;
   offerIsLoadingStatus: boolean;
+  authorizationStatus: AuthorizationStatus;
+  userData: Omit<UserData, 'token'> | undefined;
 };
 
 const initialState:InitialStateProps = {
@@ -18,7 +21,9 @@ const initialState:InitialStateProps = {
   offers: [],
   sortType: SortBy.Popular,
   offersByCity: getOffersByCity([],DEFAULT_CITY),
-  offerIsLoadingStatus: false
+  offerIsLoadingStatus: false,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  userData: undefined,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -52,5 +57,11 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersLoadingStatus, (state,action) => {
       state.offerIsLoadingStatus = action.payload;
+    })
+    .addCase(setAuthorizationStatus, (state,action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserData, (state,action) => {
+      state.userData = action.payload;
     });
 });

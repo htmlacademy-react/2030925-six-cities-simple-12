@@ -4,10 +4,11 @@ import { ToastContainer } from 'react-toastify';
 import App from './components/app/app';
 import Spinner from './components/spinner/spinner';
 import { store } from './store';
-import { fetchOffersAction } from './store/api-action';
+import { checkAuthAction, fetchOffersAction } from './store/api-action';
 import { reviews } from './mocks/reviews';
 
 store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction());
 /*
 const Setting = {
   OffersCount: 312,
