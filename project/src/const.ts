@@ -1,7 +1,5 @@
 import { Offer, Offers } from './types/offer-type';
-
 export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-
 export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
 export enum AppRoute {
@@ -12,7 +10,7 @@ export enum AppRoute {
 }
 
 export enum ApiRoute {
-  Offers = '/hotels',
+  Places = '/hotels',
   Login = '/login',
   LogOut = '/logOut',
 }
@@ -50,4 +48,4 @@ export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN'
-};
+}

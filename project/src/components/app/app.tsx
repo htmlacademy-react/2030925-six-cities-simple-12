@@ -1,6 +1,6 @@
 import MainPage from '../../pages/main-page';
 import { AppRoute } from '../../const';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import LoginPage from '../../pages/login-page';
 import ErrorPage from '../../pages/error-page';
 import { Reviews } from '../../types/review-type';

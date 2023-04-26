@@ -15,7 +15,7 @@ export default function LoginPage (): JSX.Element {
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = evt.target;
     setData({...data, [name]: value});
-  }
+  };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
