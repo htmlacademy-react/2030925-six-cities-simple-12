@@ -20,6 +20,7 @@ export default function PropertyPage({reviews}: RoomScreenProps): JSX.Element {
   const [,setNearbyPlaces] = useState<Offers>([]);
   const offers = useAppSelector((state) => state.offers);
 
+
   const onListItemHover = (listItemName: string | undefined) => {
     setActiveOffer(offers.find((offer: Offer) => offer.title === listItemName));
   };
@@ -30,6 +31,7 @@ export default function PropertyPage({reviews}: RoomScreenProps): JSX.Element {
     const nearbyOffers = offers.filter((offer: Offer) => offer.id !== Number(id) && offer.city.name === currentOffer.city.name);
     setNearbyPlaces(nearbyOffers);
   }, [id,offers]);
+
   return(
     <body>
       <div className="page">

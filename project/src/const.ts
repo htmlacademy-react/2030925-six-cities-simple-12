@@ -1,13 +1,18 @@
 import { Offer, Offers } from './types/offer-type';
-
 export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-
 export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
 export enum AppRoute {
     Main = '/',
     Login = '/login',
-    Room = '/offer/:id'
+    Room = '/offer/:id',
+
+}
+
+export enum ApiRoute {
+  Places = '/hotels',
+  Login = '/login',
+  LogOut = '/logOut',
 }
 
 export enum AVATAR_URL {
@@ -38,3 +43,9 @@ export const BasicURL = 'https://12.react.pages.academy/six-cities-simple';
 export const REQUEST_TIMEOUT = 5000;
 
 export const cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN'
+}
