@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 import { toast } from 'react-toastify';
-import { BasicURL, REQUEST_TIMEOUT } from '../../../const';
+import { BasicURL } from '../../../const';
 import { getToken } from './token';
 
 export const StatusCodeMapping: Record<number,boolean> = {
@@ -14,7 +14,6 @@ const shouldDisplayError = (response: AxiosResponse) => !StatusCodeMapping[respo
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
     baseURL: BasicURL,
-    timeout: REQUEST_TIMEOUT
   });
 
   api.interceptors.request.use(

@@ -1,12 +1,14 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logOutAction } from '../../store/api-action';
+import { getAuthorizationStatus, getUser } from '../../store/user/selectors';
 import Logo from '../logo/logo';
 
-export default function Header(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const userData = useAppSelector((state) => state.userData);
+function Header(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const usersData = useAppSelector(getUser);
   const dispatch = useAppDispatch();
   const logOut = () => {
     dispatch(logOutAction);
@@ -20,12 +22,12 @@ export default function Header(): JSX.Element {
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              {authorizationStatus === AuthorizationStatus.Auth && userData ? (
+              {authorizationStatus === AuthorizationStatus.Auth && usersData ? (
                 <>
                   <li className="header__nav-item user">
                     <div className="header__nav-profile">
-                      <img className="header__avatar-wrapper user__avatar-wrapper" src={userData.avatar} alt={userData.name}/>
-                      <span className="header__user-name user__name">{userData.mail}</span>
+                      <img className="header__avatar-wrapper user__avatar-wrapper" src={usersData.avatar} alt={usersData.name}/>
+                      <span className="header__user-name user__name">{usersData.mail}</span>
                     </div>
                   </li>
                   <li className="header__nav-item">
@@ -52,3 +54,5 @@ export default function Header(): JSX.Element {
     </header>
   );
 }
+
+export default React.memo(Header);

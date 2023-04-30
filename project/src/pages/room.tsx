@@ -6,6 +6,7 @@ import { Map } from '../components/map/map';
 import OtherPlacesList from '../components/other-places-list/other-places-list';
 import ReviewList from '../components/review-list/review-list';
 import { useAppSelector } from '../hooks';
+import { getOffers } from '../store/offers/selectors';
 import { Offer, Offers } from '../types/offer-type';
 import { Reviews } from '../types/review-type';
 
@@ -18,7 +19,7 @@ export default function PropertyPage({reviews}: RoomScreenProps): JSX.Element {
   const [activeOffer,setActiveOffer] = useState<Offer | undefined>(undefined);
   const [offer, setOffer] = useState<Offer>();
   const [,setNearbyPlaces] = useState<Offers>([]);
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
 
 
   const onListItemHover = (listItemName: string | undefined) => {
