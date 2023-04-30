@@ -9,13 +9,14 @@ import { useAppSelector } from '../../hooks';
 import LoadingPage from '../../pages/loading-page';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../services/api/browser-history/browser-history';
+import { getOffersLoadingStatus } from '../../store/offers/selectors';
 
 type AppScreenProps = {
   reviews: Reviews;
 }
 
 function App({reviews}: AppScreenProps): JSX.Element {
-  const isOffersLoading = useAppSelector((state) => state.offerIsLoadingStatus);
+  const isOffersLoading = useAppSelector(getOffersLoadingStatus);
 
   if(isOffersLoading) {
     return(

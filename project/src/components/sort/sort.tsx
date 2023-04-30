@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { SortBy } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { sortOffers } from '../../store/action';
+import { getOffers } from '../../store/offers/selectors';
 
 export default function Sort(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-  const selectedType = useAppSelector((state) => state.sortType);
+  const selectedType = useAppSelector(getOffers);
   const dispatch = useAppDispatch();
 
   const handleSort = (title: string) => {

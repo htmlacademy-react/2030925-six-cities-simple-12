@@ -1,36 +1,18 @@
-import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fillOffers, selectCity } from '../../store/action';
+import React from 'react';
+import CityItem from '../citites-item/cities-item';
 
-export type CitiesListProps = {
-    cities: string[];
-}
+type CitiesListProps = {
+  cities: string[];
+};
 
-export default function CitiesList(props: CitiesListProps) {
-  const {cities} = props;
-  const dispatch = useAppDispatch();
-  const selectedCity = useAppSelector((state) => state.city);
-  const citiesList = cities.map((city) => (
-    <li key={city} className="locations__item">
-      <Link className={
-        selectedCity === city ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item'
-      }
-      to='/'
-      onClick={() => {
-        dispatch(selectCity(city));
-        dispatch(fillOffers());
-      }}
-      >
-        <span>{city}</span>
-      </Link>
-    </li>
-  ));
-
-  return(
-    <section className="locations container">
-      <ul className="locations__list tabs__list">
-        {citiesList}
-      </ul>
-    </section>
+function CitiesList ({ cities }: CitiesListProps) {
+  return (
+    <ul className="locations__list tabs__list">
+      {cities.map((city) => (
+        <CityItem city={city} key={city} />
+      ))}
+    </ul>
   );
 }
+
+export default React.memo(CitiesList);
