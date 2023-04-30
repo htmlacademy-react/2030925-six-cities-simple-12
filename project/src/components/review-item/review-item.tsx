@@ -11,6 +11,12 @@ export default function ReviewItem(props: ReviewItemProps): JSX.Element {
   const {user} = props;
   const {rating,date,text} = review;
   const {avatar,name} = user;
+
+  const parseDate = () => {
+    const currentDate = new Date(date);
+    const month = currentDate.toLocaleString('default', {month: 'long'});
+    return `${month} ${currentDate.getFullYear()}`;
+  };
   return(
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -31,7 +37,7 @@ export default function ReviewItem(props: ReviewItemProps): JSX.Element {
         <p className="reviews__text">
           {text}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
+        <time className="reviews__time" dateTime="2019-04-24">{parseDate()}</time>
       </div>
     </li>
   );

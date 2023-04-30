@@ -1,45 +1,102 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { postCommentAction } from '../../store/api-action';
+import GetRating from '../get-rating/get-rating';
 
-export default function CommentForm (): JSX.Element {
-  const [review, setReview] = useState('');
+type CommentFormProps = {
+  offerId: number;
+}
 
-  function handleReviewChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    event.preventDefault();
+export default function CommentForm (props: CommentFormProps): JSX.Element {
+  const isCommentPosted = useAppSelector(getPostLoadingStatus);
+  const dispatch = useAppDispatch();
 
-    setReview(event.target.value);
-  }
+  const [formData, setFormData] = useState({
+    rating: 0,
+    review: '',
+    date: new Date(),
+  });
 
-  function handleSubmit(event: FormEvent<HTMLButtonElement>) {
-    event.preventDefault();
-  }
-  return(
-    <form className="reviews__form form" action="/" method="post">
-      <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <div className="reviews__rating-form form__rating" />
-      <input className="form__rating-input visually-hidden" name="rating" value='5' id='5-stars' type="radio" />
-      <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-        <svg className="form__star-image" width="37" height="33">
-          <use xlinkHref="#icon-star"></use>
-        </svg>
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState<boolean>(true);
+
+  const handleInput = (
+    evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = evt.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const clearFormData = () => {
+    setFormData({
+      ...formData,
+      rating: 0,
+      review: '',
+    });
+  };
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    dispatch(
+      postCommentAction({
+        offerId: props.offerId,
+        comment: formData.review,
+        rating: formData.rating,
+      })
+    );
+    clearFormData();
+  };
+
+  useEffect(() => {
+    if (formData.rating !== 0 && formData.review.length >= 50) {
+      setSubmitButtonDisabled(false);
+    } else {
+      setSubmitButtonDisabled(true);
+    }
+  }, [formData]);
+
+  return (
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleSubmit}
+      data-testid='send-comment-form'
+    >
+      <label className="reviews__label form__label" htmlFor="review">
+        Your review
       </label>
+      <div className="reviews__rating-form form__rating">
+        {[5, 4, 3, 2, 1].map((star) => (
+          <GetRating value={star} onChange={handleInput} key={star} rating={formData.rating} postLoadingStatus={isCommentPosted} />
+        ))}
+      </div>
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={review}
-        onChange={handleReviewChange}
-      />
+        value={formData.review}
+        onChange={handleInput}
+        data-testid='review-id'
+        disabled={isCommentPosted}
+      >
+      </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-        To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set{' '}
+          <span className="reviews__star">rating</span> and describe your stay
+          with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
-          onClick={handleSubmit}
-        >Submit
+          disabled={submitButtonDisabled}
+          data-testid='send-comment-button'
+        >
+          Submit
         </button>
       </div>
     </form>

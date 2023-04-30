@@ -6,15 +6,11 @@ import { Map } from '../components/map/map';
 import OtherPlacesList from '../components/other-places-list/other-places-list';
 import ReviewList from '../components/review-list/review-list';
 import { useAppSelector } from '../hooks';
+import { reviews } from '../mocks/reviews';
 import { getOffers } from '../store/offers/selectors';
 import { Offer, Offers } from '../types/offer-type';
-import { Reviews } from '../types/review-type';
 
-type RoomScreenProps = {
-  reviews: Reviews;
-}
-
-export default function PropertyPage({reviews}: RoomScreenProps): JSX.Element {
+export default function PropertyPage(): JSX.Element {
   const { id } = useParams();
   const [activeOffer,setActiveOffer] = useState<Offer | undefined>(undefined);
   const [offer, setOffer] = useState<Offer>();
@@ -118,7 +114,7 @@ export default function PropertyPage({reviews}: RoomScreenProps): JSX.Element {
                   <ReviewList
                     reviews={reviews}
                   />
-                  <CommentForm/>
+                  <CommentForm offerId={1}/>
                 </section>
               </div>
             </div>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Reviews, Review } from '../../types/review-type';
 import ReviewItem from '../review-item/review-item';
 
@@ -5,7 +6,7 @@ export type ReviewListProps = {
     reviews: Reviews;
 }
 
-export default function ReviewList(props: ReviewListProps): JSX.Element {
+function ReviewList(props: ReviewListProps): JSX.Element {
   const lists = props.reviews.map((review: Review) => (
     <ReviewItem
       key={review.id}
@@ -19,3 +20,5 @@ export default function ReviewList(props: ReviewListProps): JSX.Element {
 
   );
 }
+
+export default React.memo(ReviewList);
