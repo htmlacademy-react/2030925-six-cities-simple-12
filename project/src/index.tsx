@@ -5,7 +5,6 @@ import App from './components/app/app';
 import Spinner from './components/spinner/spinner';
 import { store } from './store';
 import { checkAuthAction, fetchOffersAction } from './store/api-action';
-import { reviews } from './mocks/reviews';
 
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
@@ -22,6 +21,6 @@ root.render(
   <Provider store = {store}>
     <Spinner/>
     <ToastContainer/>
-    <App reviews = {reviews}/>
+    <App/>
   </Provider>
 );

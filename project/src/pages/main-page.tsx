@@ -4,26 +4,33 @@ import { Map } from '../components/map/map';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../hooks';
 import CitiesList from '../components/citites-list/cities-list';
-import Sort from '../components/sort/sort';
 import { cities } from '../const';
 import Header from '../components/header/header';
-import { getOffers } from '../store/offers/selectors';
+import { getOffers, getSortOption } from '../store/offers/selectors';
 import { getCurrentCity } from '../store/city/selectors';
+import SortList from '../components/sort-list/sort-list';
 
 export default function MainPage (): JSX.Element {
   const [activeOffer,setActiveOffer] = useState<Offer | undefined>(undefined);
   const [currentOffer, setCurrentOffer] = useState<Offers>([]);
   const offers: Offers = useAppSelector(getOffers);
   const city: string = useAppSelector(getCurrentCity);
+  const sortOption = useAppSelector(getSortOption);
 
-  const getCurrentOffers = () => {
-    const offersCity = offers.filter((offer: Offer) => offer.city.name === city);
+  const getCurrentOffer = (type: 'cost' | 'rating', order: 'asc' | 'desc') => {
+    const offersCity = offers.filter((offer: Offer) => offer.city.name === city)
+      .sort((a, b) => {
+        if (order === 'asc') {
+          return a[type] - b[type];
+        } else {
+          return b[type] - a[type];
+        }
+      });
     setCurrentOffer(offersCity);
   };
-
   useEffect(() => {
-    getCurrentOffers();
-  },[city]);
+    getCurrentOffer(sortOption.type, sortOption.order);
+  }, [city, sortOption]);
 
   return (
     <body className="page page--gray page--main">
@@ -42,7 +49,7 @@ export default function MainPage (): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{currentOffer.length} places to stay in {city}</b>
-                <Sort/>
+                <SortList/>
                 <div className="cities__places-list places__list tabs__content">
                   <OfferListPage
                     offers={currentOffer}
