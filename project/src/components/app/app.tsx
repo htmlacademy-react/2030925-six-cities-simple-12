@@ -6,8 +6,6 @@ import ErrorPage from '../../pages/error-page';
 import Room from '../../pages/room';
 import { useAppSelector } from '../../hooks';
 import LoadingPage from '../../pages/loading-page';
-import HistoryRouter from '../history-router/history-router';
-import browserHistory from '../services/api/browser-history/browser-history';
 import { getOffersLoadingStatus } from '../../store/offers/selectors';
 
 function App(): JSX.Element {
@@ -19,24 +17,24 @@ function App(): JSX.Element {
     );
   }
   return(
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route path={AppRoute.Main}/>
-        <Route index element={<MainPage/>}/>
-        <Route
-          path={AppRoute.Login}
-          element={<LoginPage/>}
-        />
-        <Route
-          path={AppRoute.Room}
-          element={<Room/>}
-        />
-        <Route
-          path='*'
-          element={<ErrorPage/>}
-        />
-      </Routes>
-    </HistoryRouter>
+    <Routes>
+      <Route
+        path={AppRoute.Main}
+        element={<MainPage/>}
+      />
+      <Route
+        path={AppRoute.Login}
+        element={<LoginPage/>}
+      />
+      <Route
+        path={AppRoute.Room}
+        element={<Room/>}
+      />
+      <Route
+        path='*'
+        element={<ErrorPage/>}
+      />
+    </Routes>
   );
 }
 

@@ -17,6 +17,10 @@ export default function MainPage (): JSX.Element {
   const offers: Offers = useAppSelector(getOffers);
   const city: string = useAppSelector(getCurrentCity);
   const sortOption = useAppSelector(getSortOption);
+  const onListItemHover = (selectedOfferId: number | undefined) => {
+    const selectedOffer: Offer | undefined = offers.find((offer: Offer) => offer.id === selectedOfferId);
+    setActiveOffer(selectedOffer);
+  };
   const getCurrentOffer = (type: 'cost' | 'rating', order: 'asc' | 'desc') => {
     const offersCity = offers.filter((offer: Offer) => offer.city.name === city)
       .sort((a, b) => {
@@ -53,8 +57,7 @@ export default function MainPage (): JSX.Element {
                 <div className="cities__places-list places__list tabs__content">
                   <OfferListPage
                     offers={currentOffer}
-                    onActive={(item) => setActiveOffer(item)}
-                    onBlur={() => setActiveOffer(undefined)}
+                    onListItemHover={onListItemHover}
                   />
                 </div>
               </section>

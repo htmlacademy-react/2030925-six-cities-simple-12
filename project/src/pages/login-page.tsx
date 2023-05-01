@@ -1,22 +1,24 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import Logo from '../components/logo/logo';
-import { useAppDispatch } from '../hooks';
+import { AppRoute, AuthorizationStatus } from '../const';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { loginAction } from '../store/api-action';
+import { getAuthorizationStatus } from '../store/user/selectors';
 import { AuthData } from '../types/auth-data';
 
 export default function LoginPage (): JSX.Element {
   const dispatch = useAppDispatch();
-
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const [data,setData] = useState<AuthData>({
     mail: '',
     password: ''
   });
-
+  const [submitButtonDisabled,setSubmitButtonDisabled] = useState(true);
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = evt.target;
     setData({...data, [name]: value});
   };
-
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (data.mail || data.password) {
@@ -25,6 +27,20 @@ export default function LoginPage (): JSX.Element {
       );
     }
   };
+  useEffect(() => {
+    if (
+      data.mail && data.mail.match(/^\S+@\S+\.\S+$/) &&
+      data.password && data.password.match(/[A-Za-z]+[0-9]+|[0-9]+[A-Za-z]+/)
+    ) {
+      setSubmitButtonDisabled(false);
+    } else {
+      setSubmitButtonDisabled(true);
+    }
+  }, [data]);
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={AppRoute.Main}/>;
+  }
+
   return (
     <body>
       <div className="page page--gray page--login">
@@ -55,7 +71,7 @@ export default function LoginPage (): JSX.Element {
                   <label className="visually-hidden">Password</label>
                   <input className="login__input form__input" type="password" name="password" value={data.password} onChange={handleChange} placeholder="Password" required/>
                 </div>
-                <button className="login__submit form__submit button" type="submit">Sign in</button>
+                <button className="login__submit form__submit button" type="submit" disabled={submitButtonDisabled}>Sign in</button>
               </form>
             </section>
             <section className="locations locations--login locations--current">

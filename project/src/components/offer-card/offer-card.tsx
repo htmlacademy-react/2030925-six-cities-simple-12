@@ -1,22 +1,28 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/offer-type';
+import { currentRating } from '../../utils/utils';
 
 type OfferPageProps = {
   offer: Offer;
-  onActive: () => void;
-  onBlur: () => void;
+  onListItemHover: (selectedOfferId: number | undefined) => void;
 }
 
 export default function OfferCard (props: OfferPageProps): JSX.Element {
-  const {offer} = props;
+  const {offer,onListItemHover} = props;
   const {id,title,type,rating,cost,isPremium,images} = offer;
   const pageLink = `/offer/${id}`;
+  const onListItemEnter = () => {
+    onListItemHover(id);
+  };
+
+  const onListItemLeave = () => {
+    onListItemHover(undefined);
+  };
   return (
-    <article className="cities__card place-card"
-      onBlur={props.onBlur}
-      onFocus={props.onActive}
-      onMouseEnter={props.onActive}
-      onMouseLeave={props.onBlur}
+    <article
+      className="cities__card place-card"
+      onMouseEnter={onListItemEnter}
+      onMouseLeave={onListItemLeave}
     >
       <div className="place-card__mark">
         <span>{isPremium ? 'Premium' : ''}</span>
@@ -36,13 +42,13 @@ export default function OfferCard (props: OfferPageProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: currentRating(rating)}}></span>
             <span className="visually-hidden">{rating}</span>
           </div>
         </div>
-        <h2 className="place-card__name">
-          <a href="#">{title}</a>
-        </h2>
+        <Link className="place-card__name" to={`offer/${id}`}>
+          {title}
+        </Link>
         <p className="place-card__type">{type}</p>
       </div>
     </article>
