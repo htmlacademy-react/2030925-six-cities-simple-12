@@ -43,7 +43,6 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
-
 export enum NameSpace {
   Offers = 'OFFERS',
   City = 'CITY',

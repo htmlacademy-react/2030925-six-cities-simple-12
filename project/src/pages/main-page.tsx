@@ -17,7 +17,6 @@ export default function MainPage (): JSX.Element {
   const offers: Offers = useAppSelector(getOffers);
   const city: string = useAppSelector(getCurrentCity);
   const sortOption = useAppSelector(getSortOption);
-
   const getCurrentOffer = (type: 'cost' | 'rating', order: 'asc' | 'desc') => {
     const offersCity = offers.filter((offer: Offer) => offer.city.name === city)
       .sort((a, b) => {

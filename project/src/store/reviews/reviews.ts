@@ -6,7 +6,8 @@ import { fetchReviewsAction, postReviewAction } from '../api-action';
 
 const initialState: ReviewData = {
   reviews: [],
-  isReviewsLoading: false
+  isReviewsLoading: false,
+  isReviewPosted: false
 };
 
 export const reviewsData = createSlice({
@@ -19,11 +20,15 @@ export const reviewsData = createSlice({
         state.isReviewsLoading = true;
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action: PayloadAction<Reviews>) => {
-        state.reviews = action.payload.sort((a,b) => b.date.localeCompare(a.date));
+        state.reviews = action.payload.sort((a,b) => b.date.localeCompare(a.date)).slice(0,10);
         state.isReviewsLoading = false;
       })
       .addCase(postReviewAction.fulfilled, (state, action: PayloadAction<Reviews>) => {
-        state.reviews = action.payload.sort((a,b) => b.date.localeCompare(a.date));
+        state.reviews = action.payload.sort((a,b) => b.date.localeCompare(a.date)).slice(0,10);
+        state.isReviewPosted = false;
+      })
+      .addCase(postReviewAction.pending, (state) => {
+        state.isReviewPosted = true;
       });
   }
 });
