@@ -29,6 +29,7 @@ export type UserData = {
 export type ReviewData = {
     reviews: Reviews;
     isReviewsLoading: boolean;
+    isReviewPosted: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;

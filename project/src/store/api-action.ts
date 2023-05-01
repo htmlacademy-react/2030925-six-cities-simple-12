@@ -97,14 +97,14 @@ export const fetchReviewsAction = createAsyncThunk<
         state: State;
         extra: AxiosInstance;
       }
-    >('LOAD_COMMENTS', async (hotelId, { dispatch, extra: api }) => {
-      const { data } = await api.get<Reviews>(`${ApiRoute.Reviews}/${hotelId}`);
+    >('LOAD_COMMENTS', async (offerId, { dispatch, extra: api }) => {
+      const { data } = await api.get<Reviews>(`${ApiRoute.Reviews}/${offerId}`);
       return data;
     });
 
 export const postReviewAction = createAsyncThunk<
       Reviews,
-      { hotelId: number; comment: string; rating: number },
+      { offerId: number; comment: string; rating: number },
       {
         dispatch: AppDispatch;
         state: State;
@@ -112,9 +112,9 @@ export const postReviewAction = createAsyncThunk<
       }
     >(
       'POST_COMMENT',
-      async ({ hotelId, comment, rating }, { dispatch, extra: api }) => {
+      async ({ offerId, comment, rating }, { dispatch, extra: api }) => {
         const { data } = await api.post<Reviews>(
-          `${ApiRoute.Reviews}/${hotelId}`,
+          `${ApiRoute.Reviews}/${offerId}`,
           {
             comment,
             rating,
