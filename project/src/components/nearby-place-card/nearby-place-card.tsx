@@ -5,10 +5,9 @@ import { countCurrrentRating } from '../../utils/utils';
 
 type NearbyPlaceCardProps = {
   nearbyOffer: Offer;
-  offer: Offer;
 }
 
-function NearbyPlaceCard({nearbyOffer,offer}: NearbyPlaceCardProps) {
+function NearbyPlaceCard({nearbyOffer}: NearbyPlaceCardProps) {
   return (
     <article className="near-places__card place-card"
       data-testid='nearbyplace-container'
@@ -18,7 +17,7 @@ function NearbyPlaceCard({nearbyOffer,offer}: NearbyPlaceCardProps) {
           <span>Premium</span>
         </div>
       )}
-      <Link className="near-places__image-wrapper place-card__image-wrapper" to={`offer/${offer.id}`}>
+      <Link className="near-places__image-wrapper place-card__image-wrapper" to={`${Approute.Offer}/${nearbyOffer.id}`}>
         <img
           className="place-card__image"
           src={nearbyOffer.images[0]}
