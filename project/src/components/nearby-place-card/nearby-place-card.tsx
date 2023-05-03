@@ -17,7 +17,7 @@ function NearbyPlaceCard({nearbyOffer}: NearbyPlaceCardProps) {
           <span>Premium</span>
         </div>
       )}
-      <Link className="near-places__image-wrapper place-card__image-wrapper" to={Approute.Main}>
+      <Link className="near-places__image-wrapper place-card__image-wrapper" to={`${Approute.Offer}/${nearbyOffer.id}`}>
         <img
           className="place-card__image"
           src={nearbyOffer.images[0]}
