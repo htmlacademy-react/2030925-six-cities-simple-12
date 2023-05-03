@@ -1,6 +1,5 @@
-const AUTH_TOKEN_KEY_NAME = 'html-academy-794021-six-sities-simple';
+import { Token, AUTH_TOKEN_KEY_NAME } from '../../../const';
 
-export type Token = string;
 
 export const getToken = (): Token => {
   const token = localStorage.getItem(AUTH_TOKEN_KEY_NAME);
@@ -11,6 +10,6 @@ export const saveToken = (token: Token): void => {
   localStorage.setItem(AUTH_TOKEN_KEY_NAME, token);
 };
 
-export const deleteToken = (): void => {
+export const dropToken = (): void => {
   localStorage.removeItem(AUTH_TOKEN_KEY_NAME);
 };

@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { CityData } from '../../types/state';
+import { CurrentCityData } from '../../types/state';
 
-const initialState: CityData = {
+const initialState: CurrentCityData = {
   currentCity: 'Paris',
 };
 
@@ -10,7 +10,7 @@ export const currentCityData = createSlice({
   name: NameSpace.City,
   initialState,
   reducers: {
-    setCurrentCity: (state, action: PayloadAction<CityData>) => {
+    setCurrentCity: (state, action: PayloadAction<CurrentCityData>) => {
       state.currentCity = action.payload.currentCity;
     }
   }

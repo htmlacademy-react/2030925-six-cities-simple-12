@@ -1,15 +1,16 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { postReviewAction } from '../../store/api-action';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { postCommentAction } from '../../store/api-action/api-action';
 import { getPostLoadingStatus } from '../../store/reviews/selectors';
-import GetRating from '../get-rating/get-rating';
+import RatingStar from '../get-rating/get-rating';
 
-type CommentFormProps = {
-  offerId: number;
-}
 
-export default function CommentForm (props: CommentFormProps): JSX.Element {
-  const isReviewPosted = useAppSelector(getPostLoadingStatus);
+type SendCommentProps = {
+  hotelId: number;
+};
+
+function SendComment({ hotelId }: SendCommentProps) {
+  const isCommentBeingPosted = useAppSelector(getPostLoadingStatus);
   const dispatch = useAppDispatch();
 
   const [formData, setFormData] = useState({
@@ -41,8 +42,8 @@ export default function CommentForm (props: CommentFormProps): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(
-      postReviewAction({
-        offerId: props.offerId,
+      postCommentAction({
+        hotelId: hotelId,
         comment: formData.review,
         rating: formData.rating,
       })
@@ -71,7 +72,7 @@ export default function CommentForm (props: CommentFormProps): JSX.Element {
       </label>
       <div className="reviews__rating-form form__rating">
         {[5, 4, 3, 2, 1].map((star) => (
-          <GetRating value={star} onChange={handleInput} key={star} rating={formData.rating} postLoadingStatus={isReviewPosted} />
+          <RatingStar value={star} onChange={handleInput} key={star} rating={formData.rating} postLoadingStatus={isCommentBeingPosted} />
         ))}
       </div>
       <textarea
@@ -82,7 +83,7 @@ export default function CommentForm (props: CommentFormProps): JSX.Element {
         value={formData.review}
         onChange={handleInput}
         data-testid='review-id'
-        disabled={isReviewPosted}
+        disabled={isCommentBeingPosted}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -103,3 +104,5 @@ export default function CommentForm (props: CommentFormProps): JSX.Element {
     </form>
   );
 }
+
+export default SendComment;

@@ -1,56 +1,62 @@
+import { countCurrrentRating } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/offer-type';
-import { currentRating } from '../../utils/utils';
 
-type OfferPageProps = {
+type PlaceCardProps = {
   offer: Offer;
   onListItemHover: (selectedOfferId: number | undefined) => void;
-}
+};
 
-export default function OfferCard (props: OfferPageProps): JSX.Element {
-  const {offer,onListItemHover} = props;
-  const {id,title,type,rating,cost,isPremium,images} = offer;
-  const pageLink = `/offer/${id}`;
+function PlaceCard({ offer, onListItemHover }: PlaceCardProps) {
   const onListItemEnter = () => {
-    onListItemHover(id);
+    onListItemHover(offer.id);
   };
 
   const onListItemLeave = () => {
     onListItemHover(undefined);
   };
+
   return (
     <article
+      data-testid="place-card-container"
       className="cities__card place-card"
       onMouseEnter={onListItemEnter}
       onMouseLeave={onListItemLeave}
     >
-      <div className="place-card__mark">
-        <span>{isPremium ? 'Premium' : ''}</span>
-      </div>
+      {offer.isPremium && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={pageLink}>
-          <img className="place-card__image" src= {images[0] ?? null} width="260" height="200" alt={title}/>
-        </Link>
+        <img
+          className="place-card__image"
+          src={offer.images[0]}
+          width="260"
+          height="200"
+          alt={offer.title}
+        />
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{cost}</b>
+            <b className="place-card__price-value" data-testid='place-card-price'>&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: currentRating(rating)}}></span>
-            <span className="visually-hidden">{rating}</span>
+            <span style={{ width: countCurrrentRating(offer.rating) }}></span>
+            <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <Link className="place-card__name" to={`offer/${id}`}>
-          {title}
+        <Link className="place-card__name" to={`offer/${offer.id}`} data-testid='place-card-title'>
+          {offer.title}
         </Link>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
   );
 }
+
+export default PlaceCard;

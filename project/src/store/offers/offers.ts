@@ -1,23 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { SortOption } from '../../types/sort-option';
+import { FilterOptions } from '../../types/sort-option';
 import { OffersData } from '../../types/state';
-import { fetchNearbyOffersAction, fetchOffersAction, fetchSingleOfferAction } from '../api-action';
+import { fetchOffersAction, fetchSingleOfferAction, fetchNearbyOffersAction } from '../api-action/api-action';
 
-const initialState: OffersData = {
+export const initialState: OffersData = {
   offers: [],
-  isOffersLoading: false,
   error: false,
+  areOffersLoading: false,
   singleOffer: undefined,
   isSingleOfferLoading: false,
   notFoundSingleOfferError: false,
   nearbyOffers: [],
-  isNearbyOffersLoading: false,
-  sortOption: {
+  areNearbyOffersLoading: false,
+  filterOptions: {
     name: 'popular',
     type: 'rating',
-    order: 'asc'
-  }
+    order: 'asc',
+  },
 };
 
 export const offersData = createSlice({
@@ -27,24 +27,23 @@ export const offersData = createSlice({
     clearError: (state) => {
       state.error = false;
     },
-    setSortOption: (state, action: PayloadAction<SortOption>) => {
+    setFilterOptions: (state, action: PayloadAction<FilterOptions>) => {
       const data = action.payload;
-      state.sortOption = data;
+      state.filterOptions = data;
     }
   },
-
   extraReducers(builder) {
     builder
       .addCase(fetchOffersAction.pending, (state) => {
-        state.isOffersLoading = true;
+        state.areOffersLoading = true;
         state.error = false;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
-        state.isOffersLoading = false;
+        state.areOffersLoading = false;
         state.offers = action.payload;
       })
       .addCase(fetchOffersAction.rejected, (state) => {
-        state.isOffersLoading = false;
+        state.areOffersLoading = false;
         state.error = true;
       })
       .addCase(fetchSingleOfferAction.pending, (state) => {
@@ -60,18 +59,18 @@ export const offersData = createSlice({
         state.notFoundSingleOfferError = true;
       })
       .addCase(fetchNearbyOffersAction.pending, (state) => {
-        state.isNearbyOffersLoading = true;
+        state.areNearbyOffersLoading = true;
         state.error = false;
       })
       .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
-        state.isNearbyOffersLoading = false;
+        state.areNearbyOffersLoading = false;
         state.nearbyOffers = action.payload;
       })
       .addCase(fetchNearbyOffersAction.rejected, (state) => {
-        state.isNearbyOffersLoading = false;
+        state.areNearbyOffersLoading = false;
         state.error = true;
       });
   },
 });
 
-export const { clearError, setSortOption } = offersData.actions;
+export const { clearError, setFilterOptions } = offersData.actions;

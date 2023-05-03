@@ -1,49 +1,57 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { logOutAction } from '../../store/api-action';
+import { AuthorizationStatus, Approute } from '../../const';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { logoutAction } from '../../store/api-action/api-action';
 import { getAuthorizationStatus, getUser } from '../../store/user/selectors';
 import Logo from '../logo/logo';
 
-function Header(): JSX.Element {
+function Header() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const usersData = useAppSelector(getUser);
+
+  const userInfo = useAppSelector(getUser);
+
   const dispatch = useAppDispatch();
-  const logOut = () => {
-    dispatch(logOutAction);
+
+  const onLogout = () => {
+    dispatch(logoutAction());
   };
-  return(
+
+  return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo/>
+            <Logo />
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              {authorizationStatus === AuthorizationStatus.Auth && usersData ? (
+              {authorizationStatus === AuthorizationStatus.Auth && userInfo ? (
                 <>
                   <li className="header__nav-item user">
                     <div className="header__nav-profile">
-                      <img className="header__avatar-wrapper user__avatar-wrapper" src={usersData.avatar} alt={usersData.name}/>
-                      <span className="header__user-name user__name">{usersData.mail}</span>
+                      <img className="header__avatar-wrapper" src={userInfo.avatarUrl} alt={userInfo.name} />
+                      <span className="header__user-name user__name">
+                        {userInfo.email}
+                      </span>
                     </div>
                   </li>
                   <li className="header__nav-item">
-                    <Link className="header__nav-link" to={AppRoute.Main}>
-                      <div className="header__signout" onClick={logOut}>Sign out</div>
-                    </Link>
+                    <div className="header__nav-link">
+                      <div className="header__signout" onClick={onLogout}>
+                        Sign out
+                      </div>
+                    </div>
                   </li>
                 </>
               ) : (
                 <li className="header__nav-item user">
                   <Link
-                    className='header__nav-link header__nav-link--profile'
-                    to={AppRoute.Login}
+                    className="header__nav-link header__nav-link--profile"
+                    to={Approute.Login}
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__login">Sign In</span>
+                    <span className="header__login">Sign in</span>
                   </Link>
                 </li>
               )}
