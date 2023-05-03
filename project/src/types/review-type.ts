@@ -1,11 +1,14 @@
-import { User } from './user-type';
-
-export type Review = {
-    id: number;
-    user: User;
-    rating: number;
+export type Comment = {
+    comment: string;
     date: string;
-    text: string;
-};
+    id: number;
+    rating: number;
+    user: {
+      avatarUrl: string;
+      id: number;
+      isPro: boolean;
+      name: string;
+    };
+  };
 
-export type Reviews = Review[]
+export type Comments = Comment[];

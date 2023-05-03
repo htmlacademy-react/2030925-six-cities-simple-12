@@ -1,5 +1,5 @@
-export type SortOption = {
+export type FilterOptions = {
     name: string;
-    type: 'cost' | 'rating';
+    type: 'price' | 'rating';
     order: 'asc' | 'desc';
-};
+  };

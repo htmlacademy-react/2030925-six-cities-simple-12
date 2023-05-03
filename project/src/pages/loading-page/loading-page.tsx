@@ -1,11 +1,11 @@
-import Spinner from '../components/spinner/spinner';
+import Spinner from '../../components/spinner/spinner';
 
-export default function LoadingPage() {
-  return(
+function LoadingScreen() {
+  return (
     <div className="not-found__container">
       <div className="property__mark">
         <h1 className="property__name">
-            Loading...
+          Loading...
         </h1>
         <span></span>
       </div>
@@ -13,3 +13,5 @@ export default function LoadingPage() {
     </div>
   );
 }
+
+export default LoadingScreen;

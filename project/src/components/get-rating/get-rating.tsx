@@ -1,15 +1,14 @@
 import { ChangeEvent } from 'react';
 
-type GetRatingProps = {
-    value: number;
-    rating: number;
-    postLoadingStatus: boolean;
-    onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
-}
+type RatingStarProps = {
+  value: number;
+  onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+  rating: number;
+  postLoadingStatus: boolean;
+};
 
-export default function GetRating(props: GetRatingProps): JSX.Element {
-  const {value, rating, postLoadingStatus, onChange} = props;
-  return(
+function RatingStar({value, onChange, rating, postLoadingStatus}: RatingStarProps) {
+  return (
     <>
       <input
         className='form__rating-input visually-hidden'
@@ -33,3 +32,6 @@ export default function GetRating(props: GetRatingProps): JSX.Element {
     </>
   );
 }
+
+export default RatingStar;
+

@@ -1,4 +1,4 @@
-export type AuthData = {
-    mail: string;
+export type AuthInfo = {
+    email: string;
     password: string;
-}
+  };

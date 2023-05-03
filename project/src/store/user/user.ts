@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus, NameSpace } from '../../const';
+
 import { UserData } from '../../types/state';
-import { checkAuthAction, loginAction, logOutAction } from '../api-action';
+import { checkAuthAction, loginAction, logoutAction } from '../api-action/api-action';
+
 
 const initialState: UserData = {
-  userData: undefined,
-  authorizationStatus: AuthorizationStatus.Unknown
+  userInfo: undefined,
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 export const userData = createSlice({
@@ -16,12 +18,12 @@ export const userData = createSlice({
     builder
       .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
-        state.userData = {
+        state.userInfo = {
+          email: action.payload.email,
+          avatarUrl: action.payload.avatarUrl,
           id: action.payload.id,
+          isPro: action.payload.isPro,
           name: action.payload.name,
-          mail: action.payload.mail,
-          avatar: action.payload.avatar,
-          isPro: action.payload.isPro
         };
       })
       .addCase(checkAuthAction.rejected, (state) => {
@@ -33,9 +35,9 @@ export const userData = createSlice({
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
-      .addCase(logOutAction.fulfilled, (state) => {
+      .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
-        state.userData = undefined;
+        state.userInfo = undefined;
       });
-  }
+  },
 });

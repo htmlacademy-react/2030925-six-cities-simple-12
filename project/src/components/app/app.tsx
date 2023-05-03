@@ -1,39 +1,26 @@
-import MainPage from '../../pages/main-page';
-import { AppRoute } from '../../const';
-import { Route, Routes } from 'react-router-dom';
-import LoginPage from '../../pages/login-page';
-import ErrorPage from '../../pages/error-page';
-import Room from '../../pages/room';
+import { Routes, Route } from 'react-router-dom';
+import { Approute } from '../../const';
 import { useAppSelector } from '../../hooks';
-import LoadingPage from '../../pages/loading-page';
+import NotFoundScreen from '../../pages/error-page/error-page';
+import LoadingScreen from '../../pages/loading-page/loading-page';
+import Login from '../../pages/login-page/login-page';
+import MainScreen from '../../pages/main-page/main-page';
+import Room from '../../pages/room/room';
 import { getOffersLoadingStatus } from '../../store/offers/selectors';
 
 function App(): JSX.Element {
-  const isOffersLoading = useAppSelector(getOffersLoadingStatus);
+  const areOffersLoading = useAppSelector(getOffersLoadingStatus);
 
-  if(isOffersLoading) {
-    return(
-      <LoadingPage/>
-    );
+  if (areOffersLoading) {
+    return <LoadingScreen />;
   }
-  return(
+
+  return (
     <Routes>
-      <Route
-        path={AppRoute.Main}
-        element={<MainPage/>}
-      />
-      <Route
-        path={AppRoute.Login}
-        element={<LoginPage/>}
-      />
-      <Route
-        path={AppRoute.Room}
-        element={<Room/>}
-      />
-      <Route
-        path='*'
-        element={<ErrorPage/>}
-      />
+      <Route path={Approute.Main} element={<MainScreen />} />
+      <Route path={Approute.Room} element={<Room />} />
+      <Route path={Approute.Login} element={<Login />} />
+      <Route path="*" element={<NotFoundScreen />} />
     </Routes>
   );
 }

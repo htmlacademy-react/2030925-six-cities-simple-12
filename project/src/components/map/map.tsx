@@ -1,33 +1,38 @@
-import { Icon } from 'leaflet';
-import leaflet from 'leaflet';
 import { useEffect, useRef } from 'react';
-import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
+import leaflet from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
 import { City } from '../../types/city-type';
 import { Offers, Offer } from '../../types/offer-type';
 
+
 type MapProps = {
-    city: City;
-    offers: Offers;
-    selectedPoint: Offer | undefined;
-}
+  city: City;
+  offers: Offers;
+  selectedPoint: Offer | undefined;
+};
 
-const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40,40],
-  iconAnchor: [20,40]
-});
-
-const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40,40],
-  iconAnchor: [20,40]
-});
-
-export function Map(props: MapProps): JSX.Element {
-  const {city,offers,selectedPoint} = props;
+function Map({ city, offers, selectedPoint }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+
+  const defaultCustomIcon = leaflet.divIcon({
+    html: `
+    <svg width='27' height='39' xmlns='http://www.w3.org/2000/svg'><path d='M23.856 17.929a11.733 11.733 0 0 0 1.213-5.196C25.07 6.253 19.816 1 13.336 1c-1.835 0-3.643.44-5.272 1.285C2.444 5.197.248 12.113 3.16 17.733l9.736 18.792a1 1 0 0 0 1.784-.017l9.176-18.58z' fill='#4481C3' stroke='#FFF' stroke-width='2' fill-rule='evenodd'/></svg>
+    `,
+    className: '',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+
+  const currentCustomIcon = leaflet.divIcon({
+    html: `
+    <svg width='27' height='39' xmlns='http://www.w3.org/2000/svg'><path d='M23.856 17.929a11.733 11.733 0 0 0 1.213-5.196C25.07 6.253 19.816 1 13.336 1c-1.835 0-3.643.44-5.272 1.285C2.444 5.197.248 12.113 3.16 17.733l9.736 18.792a1 1 0 0 0 1.784-.017l9.176-18.58z' fill='#FF9000' stroke='#FFF' stroke-width='2' fill-rule='evenodd'/></svg>
+    `,
+    className: '',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
 
   useEffect(() => {
     if (map) {
@@ -35,19 +40,28 @@ export function Map(props: MapProps): JSX.Element {
         leaflet
           .marker(
             {
-              lat: offer.city.location.lat,
-              lng: offer.city.location.lng
+              lat: offer.location.latitude,
+              lng: offer.location.longitude,
             },
             {
               icon:
-                    selectedPoint !== undefined && offer.city.name === selectedPoint.city.name
-                      ? currentCustomIcon
-                      : defaultCustomIcon,
+                selectedPoint !== undefined && offer.id === selectedPoint.id
+                  ? currentCustomIcon
+                  : defaultCustomIcon,
             }
           )
           .addTo(map);
       });
     }
-  }, [map,offers,selectedPoint]);
-  return <div style={{ width: '500px', height: '500px'}} ref={mapRef}></div>;
+  }, [map, offers, selectedPoint, currentCustomIcon, defaultCustomIcon, city]);
+
+  useEffect(() => {
+    if (map) {
+      map.setView([city.location.latitude, city.location.longitude]);
+    }
+  }, [city, map]);
+
+  return <div style={{ height: '100%', width: '100%' }} ref={mapRef}></div>;
 }
+
+export default Map;

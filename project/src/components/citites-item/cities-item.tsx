@@ -1,12 +1,12 @@
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import { setCurrentCity } from '../../store/city/city';
 import { getCurrentCity } from '../../store/city/selectors';
 
 type CityItemProps = {
-    city: string;
-  };
+  city: string;
+};
 
-export default function CityItem({ city }: CityItemProps) {
+function CityItem({ city }: CityItemProps) {
   const currentCity: string = useAppSelector(getCurrentCity);
 
   const dispatch = useAppDispatch();
@@ -28,3 +28,5 @@ export default function CityItem({ city }: CityItemProps) {
     </li>
   );
 }
+
+export default CityItem;

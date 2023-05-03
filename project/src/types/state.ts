@@ -1,36 +1,37 @@
 import { AuthorizationStatus } from '../const';
 import { store } from '../store';
-import { Offer, Offers } from './offer-type';
-import { Reviews } from './review-type';
-import { SortOption } from './sort-option';
-import { UsersData } from './user-data';
+import { Offers, Offer } from './offer-type';
+import { Comments } from './review-type';
+import { FilterOptions } from './sort-option';
+import { UserInfo } from './user-data';
+
 
 export type OffersData = {
-    offers: Offers;
-    singleOffer: Offer | undefined;
-    notFoundSingleOfferError: boolean;
-    isSingleOfferLoading: boolean;
-    nearbyOffers: Offers;
-    isNearbyOffersLoading: boolean;
-    isOffersLoading: boolean;
-    sortOption: SortOption;
-    error: boolean;
+  offers: Offers;
+  singleOffer: Offer | undefined;
+  notFoundSingleOfferError: boolean;
+  isSingleOfferLoading: boolean;
+  nearbyOffers: Offers;
+  areNearbyOffersLoading: boolean;
+  areOffersLoading: boolean;
+  filterOptions: FilterOptions;
+  error: boolean;
+};
+
+export type CommentsData = {
+  comments: Comments;
+  areCommentsLoading: boolean;
+  isCommentBeingPosted: boolean;
 }
 
-export type CityData = {
-    currentCity: string;
-}
+export type CurrentCityData = {
+  currentCity: string;
+};
 
 export type UserData = {
-    userData: Omit<UsersData, 'token'> | undefined;
-    authorizationStatus: AuthorizationStatus;
-}
-
-export type ReviewData = {
-    reviews: Reviews;
-    isReviewsLoading: boolean;
-    isReviewPosted: boolean;
-}
+  userInfo: Omit<UserInfo, 'token'> | undefined;
+  authorizationStatus: AuthorizationStatus;
+};
 
 export type State = ReturnType<typeof store.getState>;
 

@@ -1,19 +1,19 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useAppSelector } from '../../hooks';
-import { getSortOption } from '../../store/offers/selectors';
-import { SortOption } from '../../types/sort-option';
-import SortItem from '../sort-item/sort-item';
+import { getFilterOptions } from '../../store/offers/selectors';
+import { FilterOptions } from '../../types/sort-option';
+import OptionItem from '../option-item/option-item';
 
-export const sortItems: SortOption[] = [
+export const sortItems: FilterOptions[] = [
   { name: 'Popular', type: 'rating', order: 'asc' },
-  { name: 'Price: low to high', type: 'cost', order: 'asc' },
-  { name: 'Price: high to low', type: 'cost', order: 'desc' },
+  { name: 'Price: low to high', type: 'price', order: 'asc' },
+  { name: 'Price: high to low', type: 'price', order: 'desc' },
   { name: 'Top rated first', type: 'rating', order: 'desc' },
 ];
 
 function OptionsList() {
   const [visiblePopup, setVisiblePopup] = useState(false);
-  const activeSortOption = useAppSelector(getSortOption);
+  const activeFilterOption = useAppSelector(getFilterOptions);
   const sortPopup = useRef<HTMLSpanElement | null>(null);
 
   const toggleVisiblePopup = () => {
@@ -30,7 +30,7 @@ function OptionsList() {
         onClick={toggleVisiblePopup}
         data-testid='active-filter-option'
       >
-        {activeSortOption.name}
+        {activeFilterOption.name}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -41,11 +41,7 @@ function OptionsList() {
         }`}
       >
         {sortItems.map((sortItem) => (
-          <SortItem
-            {...sortItem}
-            key={sortItem.name}
-            toggleVisiblePopup={toggleVisiblePopup}
-          />
+          <OptionItem {...sortItem} key={sortItem.name} toggleVisiblePopup={toggleVisiblePopup} />
         ))}
       </ul>
     </form>
