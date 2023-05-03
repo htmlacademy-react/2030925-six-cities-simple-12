@@ -15,7 +15,7 @@ import { AuthorizationStatus } from '../../const';
 import { fetchSingleOfferAction, fetchNearbyOffersAction, fetchCommentsAction } from '../../store/api-action/api-action';
 import { getComments, getCommentsLoadingStatus } from '../../store/reviews/selectors';
 
-function Room(): JSX.Element {
+export default function Room(): JSX.Element {
   const { id } = useParams();
 
   const dispatch = useAppDispatch();
@@ -201,5 +201,3 @@ function Room(): JSX.Element {
     </div>
   );
 }
-
-export default Room;

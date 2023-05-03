@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
-import React from 'react';
 import { makeMockComments } from '../../mocks/mocks';
+import CommentsList from '../comments-list/comments-list';
 
 describe('CommentsList component', () => {
   const mockComments = makeMockComments();
