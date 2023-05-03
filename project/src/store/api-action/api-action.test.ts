@@ -2,9 +2,9 @@ import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
-import { makeMockOffers, makeMockOffer, makeMockComments } from '../../mocks/mocks';
+import { makeMockOffers, makeMockOffer } from '../../mocks/mocks';
 import { redirectToRoute } from '../action';
-import { APIRoute } from '../../const';
+import { ApiRoute } from '../../const';
 import { State } from '../../types/state';
 import { createAPI } from '../../components/services/api/api';
 import { checkAuthAction, fetchCommentsAction, fetchNearbyOffersAction, fetchOffersAction, fetchSingleOfferAction, loginAction, logoutAction } from './api-action';
@@ -22,7 +22,7 @@ describe('Async actions', () => {
 
   it('Should state Authorization status \'auth\' when server return 200', async () => {
     const store = mockStore();
-    mockApi.onGet(APIRoute.Login).reply(200, []);
+    mockApi.onGet(ApiRoute.Login);
 
     expect(store.getActions()).toEqual([]);
 
@@ -42,7 +42,7 @@ describe('Async actions', () => {
       password: '12345',
     };
 
-    mockApi.onPost(APIRoute.Login).reply(200, { token: 'secret' });
+    mockApi.onPost(ApiRoute.Login);
 
     const store = mockStore();
     Storage.prototype.setItem = jest.fn();
@@ -64,8 +64,7 @@ describe('Async actions', () => {
 
   it('should dispatch Logout when Delete /logout', async () => {
     mockApi
-      .onDelete(APIRoute.Logout)
-      .reply(204);
+      .onDelete(ApiRoute.Logout);
 
     const store = mockStore();
     Storage.prototype.removeItem = jest.fn();
@@ -85,8 +84,7 @@ describe('Async actions', () => {
   });
 
   it('should dispatch \'fetchOffersAction\' when GET /offers', async () => {
-    const mockOffers = makeMockOffers();
-    mockApi.onGet(APIRoute.Offers).reply(200, mockOffers);
+    mockApi.onGet(ApiRoute.Offers);
 
     const store = mockStore();
 
@@ -102,7 +100,7 @@ describe('Async actions', () => {
 
   it('should dispatch \'fetchSingleOfferAction\' when GET /offer/:id', async () => {
     const mockOffer = makeMockOffer();
-    mockApi.onGet(`${APIRoute.Offers}/${mockOffer.id}`).reply(200, mockOffer);
+    mockApi.onGet(`${ApiRoute.Offers}/${mockOffer.id}`);
 
     const store = mockStore();
 
@@ -118,7 +116,7 @@ describe('Async actions', () => {
 
   it('should dispatch \'fetchNearbyOffersAction\' when GET /offer/:id/nearby', async () => {
     const mockOffers = makeMockOffers();
-    mockApi.onGet(`${APIRoute.Offers}/${mockOffers[0].id}/nearby`).reply(200, mockOffers);
+    mockApi.onGet(`${ApiRoute.Offers}/${mockOffers[0].id}/nearby`);
 
     const store = mockStore();
 
@@ -133,8 +131,7 @@ describe('Async actions', () => {
   });
 
   it('should dispatch \'fetchCommentsAction\' when GET /comments/:hotelId', async () => {
-    const mockComments = makeMockComments();
-    mockApi.onGet(`${APIRoute.Comments}/1`).reply(200, mockComments);
+    mockApi.onGet(`${ApiRoute.Comments}/1`);
 
     const store = mockStore();
 

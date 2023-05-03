@@ -28,7 +28,7 @@ function PlaceCard({ offer, onListItemHover }: PlaceCardProps) {
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <Link className="cities__image-wrapper place-card__image-wrapper" to={`offer/${offer.id}`}>
         <img
           className="place-card__image"
           src={offer.images[0]}
@@ -36,7 +36,7 @@ function PlaceCard({ offer, onListItemHover }: PlaceCardProps) {
           height="200"
           alt={offer.title}
         />
-      </div>
+      </Link>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">

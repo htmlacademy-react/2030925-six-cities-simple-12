@@ -67,9 +67,7 @@ function MainScreen(): JSX.Element {
           </symbol>
         </svg>
       </div>
-
       <Header />
-
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

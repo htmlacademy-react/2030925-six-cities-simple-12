@@ -71,9 +71,7 @@ export default function Room(): JSX.Element {
           </symbol>
         </svg>
       </div>
-
       <Header />
-
       {offer && (
         <main className="page__main page__main--property">
           <section className="property">
