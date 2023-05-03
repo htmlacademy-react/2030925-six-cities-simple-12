@@ -5,7 +5,7 @@ export enum Approute {
   Room = '/offer/:id',
 }
 
-export enum APIRoute {
+export enum ApiRoute {
   Offers = '/hotels',
   Login = '/login',
   Logout = '/logout',

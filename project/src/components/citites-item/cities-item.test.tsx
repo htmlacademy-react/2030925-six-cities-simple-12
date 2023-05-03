@@ -33,3 +33,4 @@ describe('City Item component', () => {
     expect(actions[0].type).toBe('CITY/setCurrentCity');
   });
 });
+

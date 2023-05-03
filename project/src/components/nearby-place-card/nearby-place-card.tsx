@@ -17,7 +17,7 @@ function NearbyPlaceCard({nearbyOffer}: NearbyPlaceCardProps) {
           <span>Premium</span>
         </div>
       )}
-      <div className="near-places__image-wrapper place-card__image-wrapper">
+      <Link className="near-places__image-wrapper place-card__image-wrapper" to={Approute.Main}>
         <img
           className="place-card__image"
           src={nearbyOffer.images[0]}
@@ -25,7 +25,7 @@ function NearbyPlaceCard({nearbyOffer}: NearbyPlaceCardProps) {
           height="200"
           alt={nearbyOffer.title}
         />
-      </div>
+      </Link>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">

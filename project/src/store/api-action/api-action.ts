@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { saveToken, dropToken } from '../../components/services/api/token';
-import { APIRoute, Approute } from '../../const';
+import { ApiRoute, Approute } from '../../const';
 import { AuthInfo } from '../../types/auth-data';
 import { Offers, Offer } from '../../types/offer-type';
 import { Comments } from '../../types/review-type';
@@ -19,7 +19,7 @@ export const fetchOffersAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('LOAD_OFFERS', async (_arg, { dispatch, extra: api }) => {
-  const { data } = await api.get<Offers>(APIRoute.Offers);
+  const { data } = await api.get<Offers>(ApiRoute.Offers);
   return data;
 });
 
@@ -32,7 +32,7 @@ export const fetchSingleOfferAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('LOAD_OFFER', async (id, { dispatch, extra: api }) => {
-  const { data } = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
+  const { data } = await api.get<Offer>(`${ApiRoute.Offers}/${id}`);
   return data;
 });
 
@@ -46,7 +46,7 @@ export const fetchNearbyOffersAction = createAsyncThunk<
   }
 >('LOAD_NEARBY_OFFERS', async (id, { dispatch, extra: api }) => {
   const { data } = await api.get<Offers>(
-    `${APIRoute.Offers}/${id}/nearby`
+    `${ApiRoute.Offers}/${id}/nearby`
   );
   return data.slice(0, 3);
 });
@@ -60,7 +60,7 @@ export const fetchCommentsAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('LOAD_COMMENTS', async (hotelId, { dispatch, extra: api }) => {
-  const { data } = await api.get<Comments>(`${APIRoute.Comments}/${hotelId}`);
+  const { data } = await api.get<Comments>(`${ApiRoute.Comments}/${hotelId}`);
   return data.slice(0, 10);
 });
 
@@ -76,7 +76,7 @@ export const postCommentAction = createAsyncThunk<
   'POST_COMMENT',
   async ({ hotelId, comment, rating }, { dispatch, extra: api }) => {
     const { data } = await api.post<Comments>(
-      `${APIRoute.Comments}/${hotelId}`,
+      `${ApiRoute.Comments}/${hotelId}`,
       {
         comment,
         rating,
@@ -95,7 +95,7 @@ export const checkAuthAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('CHECK_AUTHORIZATION', async (_arg, { dispatch, extra: api }) => {
-  const { data }: AxiosResponse<UserInfo> = await api.get(APIRoute.Login);
+  const { data }: AxiosResponse<UserInfo> = await api.get(ApiRoute.Login);
   return data;
 });
 
@@ -108,7 +108,7 @@ export const loginAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('LOGIN', async ({ email, password }, { dispatch, extra: api }) => {
-  const { data } = await api.post<UserInfo>(APIRoute.Login, {
+  const { data } = await api.post<UserInfo>(ApiRoute.Login, {
     email,
     password,
   });
@@ -126,7 +126,7 @@ export const logoutAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('LOGOUT', async (_arg, { dispatch, extra: api }) => {
-  await api.delete(APIRoute.Logout);
+  await api.delete(ApiRoute.Logout);
   dropToken();
   dispatch(redirectToRoute(Approute.Login));
 });
