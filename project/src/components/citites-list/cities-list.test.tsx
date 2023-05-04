@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { cities } from '../../const';
+import { CITIES } from '../../const';
 import { mockStore } from '../../mocks/mock-store';
 import { makeFakeCity } from '../../mocks/mocks';
 import CitiesList from './cities-list';
@@ -12,7 +12,7 @@ describe('CityList component', () => {
 
     render(
       <Provider store={store}>
-        <CitiesList cities={cities} />
+        <CitiesList cities={CITIES} />
       </Provider>
     );
 
@@ -20,6 +20,6 @@ describe('CityList component', () => {
     const items = within(list).getAllByRole('listitem');
     const currentCities = items.map((item) => item.textContent);
 
-    expect(currentCities).toEqual(cities);
+    expect(currentCities).toEqual(CITIES);
   });
 });

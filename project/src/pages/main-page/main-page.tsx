@@ -7,7 +7,7 @@ import OptionsList from '../../components/options-list/options-list';
 import MainEmpty from '../../components/main-empty/main-empty';
 import CitiesList from '../../components/citites-list/cities-list';
 import PlacesList from '../../components/offer-list/offer-list';
-import { cities } from '../../const';
+import { CITIES } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { Offer, Offers } from '../../types/offer-type';
 
@@ -72,7 +72,7 @@ function MainScreen(): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList cities={cities} />
+            <CitiesList cities={CITIES} />
           </section>
         </div>
         {currentOffers.length ? (

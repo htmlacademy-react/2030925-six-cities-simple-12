@@ -14,6 +14,7 @@ import SendComment from '../../components/review-form/review-form';
 import { AuthorizationStatus } from '../../const';
 import { fetchSingleOfferAction, fetchNearbyOffersAction, fetchCommentsAction } from '../../store/api-action/api-action';
 import { getComments, getCommentsLoadingStatus } from '../../store/reviews/selectors';
+import PropertyGallery from '../../components/property-gallery/property-gallery';
 
 export default function Room(): JSX.Element {
   const { id } = useParams();
@@ -75,19 +76,7 @@ export default function Room(): JSX.Element {
       {offer && (
         <main className="page__main page__main--property">
           <section className="property">
-            <div className="property__gallery-container container">
-              <div className="property__gallery">
-                {offer.images.map((image) => (
-                  <div className="property__image-wrapper" key={image}>
-                    <img
-                      className="property__image"
-                      src={image}
-                      alt={offer.title}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <PropertyGallery images={offer.images} dataTestId="room-title"/>
             <div className="property__container container">
               <div className="property__wrapper">
                 {offer.isPremium && (
@@ -166,7 +155,7 @@ export default function Room(): JSX.Element {
                       {comments.length}
                     </span>
                   </h2>
-                  {<CommentsList comments={comments} />}
+                  <CommentsList comments={comments} />
                   {authorizationStatus === AuthorizationStatus.Auth && <SendComment hotelId={offer.id} />}
                 </section>
               </div>

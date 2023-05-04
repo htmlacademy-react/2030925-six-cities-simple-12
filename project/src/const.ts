@@ -16,7 +16,7 @@ export const AUTH_TOKEN_KEY_NAME = 'offers-token';
 
 export type Token = string;
 
-export const cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+export const CITIES: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',

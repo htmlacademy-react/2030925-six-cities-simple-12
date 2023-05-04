@@ -1,7 +1,7 @@
 import {Comment as CommentType} from '../../types/review-type';
 import { countCurrrentRating, parseDate } from '../../utils/utils';
 
-export default function Comment({comment, user, rating, date}: CommentType) {
+function Comment({comment, user, rating, date}: CommentType) {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -33,3 +33,5 @@ export default function Comment({comment, user, rating, date}: CommentType) {
     </li>
   );
 }
+
+export default Comment;
