@@ -4,7 +4,6 @@ import { postCommentAction } from '../../store/api-action/api-action';
 import { getPostLoadingStatus } from '../../store/reviews/selectors';
 import RatingStar from '../get-rating/get-rating';
 
-
 type SendCommentProps = {
   hotelId: number;
 };
@@ -12,14 +11,13 @@ type SendCommentProps = {
 function SendComment({ hotelId }: SendCommentProps) {
   const isCommentBeingPosted = useAppSelector(getPostLoadingStatus);
   const dispatch = useAppDispatch();
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState<boolean>(true);
 
   const [formData, setFormData] = useState({
     rating: 0,
     review: '',
     date: new Date(),
   });
-
-  const [submitButtonDisabled, setSubmitButtonDisabled] = useState<boolean>(true);
 
   const handleInput = (
     evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -72,7 +70,7 @@ function SendComment({ hotelId }: SendCommentProps) {
       </label>
       <div className="reviews__rating-form form__rating">
         {[5, 4, 3, 2, 1].map((star) => (
-          <RatingStar value={star} onChange={handleInput} key={star} rating={formData.rating} postLoadingStatus={isCommentBeingPosted} />
+          <RatingStar value={star} onChange={handleInput} key={star} rating={formData.rating} postLoadingStatus={isCommentBeingPosted}/>
         ))}
       </div>
       <textarea
